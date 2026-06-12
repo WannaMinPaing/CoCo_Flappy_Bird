@@ -56,7 +56,7 @@ export class GameCtrl extends Component {
      }
 
      startGame(){
-          this.results.hideResults;
+          this.results.hideResults();
           director.resume();
      }
 
@@ -67,7 +67,7 @@ export class GameCtrl extends Component {
 
      resetGame(){
           this.results.resetScore();
-          this.startGame
+          this.startGame();
      }
 
 }
