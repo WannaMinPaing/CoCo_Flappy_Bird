@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Vec3, UITransform, Canvas, director } from 'cc';
 const { ccclass, property } = _decorator;
+import { GameCtrl } from './GameCtrl';
 
 @ccclass('Ground')
 export class Ground extends Component {
@@ -16,9 +17,11 @@ export class Ground extends Component {
     @property({ type: Node, tooltip: 'Ground segment 3' })
     public ground3: Node = null;
 
+    public gameCtrlSpeed = new GameCtrl;
+
     // gameSpeed — မြေပြင် ရွေ့လျားနှုန်း (တစ်စက္ကန့်လျှင် pixel အရေအတွက်)
     @property({ tooltip: 'Scroll speed in pixels per second' })
-    public gameSpeed: number = 50;
+    public gameSpeed: number;
 
     // grounds — မြေပြင် node အားလုံးကို စုစည်းထားသော array
     private grounds: Node[] = [];
@@ -70,7 +73,7 @@ export class Ground extends Component {
     // ကျော်လွန်သွားသည်နှင့် ၎င်းကို belt အရှည်တစ်ခုလုံးအတိုင်း ညာဘက်အဆုံးသို့ ပြန်ရွှေ့ပေးသဖြင့်
     // မြေပြင်သည် အဆက်မပြတ် (seamless) လှည့်ပတ်နေသကဲ့သို့ ဖြစ်စေသည်။
     update(deltaTime: number) {
-        const move = this.gameSpeed * deltaTime;
+        const move = this.gameCtrlSpeed.speed * deltaTime;
 
         for (let i = 0; i < this.grounds.length; i++) {
             const g = this.grounds[i];
